@@ -1,5 +1,9 @@
 package structure.tree;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,6 +11,7 @@ public class TestCase {
 	int[] array ;
 	int[] array_height;
 	BinarySortTree tree;
+	AVL avlTree = new AVL();
 	@Before
 	public void before(){
 		int[] array1 = {8,1,5,2,6,4,3,9,7};
@@ -14,6 +19,7 @@ public class TestCase {
 		array = array1;
 		array_height = array2;
 		tree = new BinarySortTree();
+		avlTree = new AVL();
 	}
 	@Test
 	/**
@@ -60,5 +66,19 @@ public class TestCase {
 		tree.insert(array_height);
 		System.out.println(tree.height());
 	}
-
+	@Test
+	/**
+	 * Test AVL tree
+	 */
+	public void testAVLTree1(){
+		LinkedList<TreeNode> trace = new LinkedList();
+		avlTree.insert(1, trace);
+		avlTree.insert(2, trace);
+		avlTree.insert(3, trace);
+		avlTree.preOrderTraverse(avlTree.getRoot());
+		while(!trace.isEmpty()){
+			System.out.println(trace.pop().getValue());
+		}
+		
+	}
 }
