@@ -5,11 +5,14 @@ import org.junit.Test;
 
 public class TestCase {
 	int[] array ;
+	int[] array_height;
 	BinarySortTree tree;
 	@Before
 	public void before(){
 		int[] array1 = {8,1,5,2,6,4,3,9,7};
+		int[] array2 = {1,2,3,4,5,6,7,8,9};
 		array = array1;
+		array_height = array2;
 		tree = new BinarySortTree();
 	}
 	@Test
@@ -47,6 +50,15 @@ public class TestCase {
 		tree.preOrderTraverse();
 		tree.remove(6);
 		tree.preOrderTraverse();
+	}
+	
+	@Test
+	/**
+	 * test height(TreeNode root)
+	 */
+	public void testBinarySortTree4(){
+		tree.insert(array_height);
+		System.out.println(tree.height());
 	}
 
 }

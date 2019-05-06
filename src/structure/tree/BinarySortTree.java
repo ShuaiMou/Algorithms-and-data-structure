@@ -16,6 +16,10 @@ public class BinarySortTree {
 		return root;
 	}
 	
+	public void setRoot(TreeNode root){
+		this.root = root;
+	}
+	
 	public BinarySortTree(int value){
 		root = new TreeNode(value);
 		root.setLchild(null);
@@ -275,6 +279,23 @@ public class BinarySortTree {
 	
 	public void remove(int value){
 		remove(this.root, value);
+	}
+	
+	/**
+	 * to get the height of the tree
+	 * @param root
+	 * @return
+	 */
+	public int height(TreeNode root){
+		if (root == null) {
+			return -1;
+		}else {
+			return Math.max(height(root.getLchild()), height(root.getRchild())) + 1;
+		}
+	}
+	
+	public int height(){
+		return height(root);
 	}
 	/**
 	 * 中序遍历（递归）

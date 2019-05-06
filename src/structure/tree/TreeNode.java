@@ -2,6 +2,7 @@ package structure.tree;
 
 public class TreeNode {
 	private int value;
+	private int height;//this is for AVL tree,it is not used in BinarySortTree.
 	private TreeNode lchild;
 	private TreeNode rchild;
 	
@@ -29,8 +30,15 @@ public class TreeNode {
 	public void setRchild(TreeNode rchild) {
 		this.rchild = rchild;
 	}
-
 	
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
 	public TreeNode() {
 		super();
 	}
