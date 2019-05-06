@@ -226,40 +226,55 @@ public class BinarySortTree {
 	 * @param value
 	 * @return
 	 */
-	public TreeNode remove(TreeNode root, int value){
-		TreeNode dNode = null;
-		TreeNode temp = null;
-		while(root != null && value != root.getValue()){
-			if (value < root.getValue()) {
-				root = root.getLchild();
-			}else if(value > root.getValue()){
-				root = root.getRchild();
+	public void remove(TreeNode root, int value){
+		TreeNode head = root;
+		TreeNode parent = head;
+		TreeNode temp  = null;
+		while(head != null && value != head.getValue()){
+			parent = head;
+			if (value < head.getValue()) {
+				head = head.getLchild();
+			}else if(value > head.getValue()){
+				head = head.getRchild();
 			}
 		}
-		dNode = root;
-		if (dNode == null) {
+		if (head == null) {
 			System.out.println("the node is not exists in this tree");
-		}else if(dNode.getLchild() != null && dNode.getRchild() != null){
-			root.setValue(findMin(root.getRchild()).getValue());
-			dNode = remove(root.getRchild(),root.getValue());
-		}else{
-			if (dNode.getLchild() == null && dNode.getRchild()!= null) {
-				root.setValue(dNode.getRchild().getValue());
-				root.setRchild(dNode.getRchild().getRchild());
-				root.setLchild(dNode.getLchild().getLchild());
-			}else if(root.getRchild() == null && dNode.getLchild() != null){
-				root.setValue(dNode.getLchild().getValue());
-				root.setRchild(dNode.getRchild().getRchild());
-				root.setLchild(dNode.getLchild().getLchild());
+		}else if(head.getLchild() != null && head.getRchild() != null){
+			temp = head.getLchild();
+			parent = head;
+			while(temp.getRchild() != null){//找到前驱节点
+				parent = temp;
+				temp = temp.getRchild();
+			}
+			head.setValue(temp.getValue());
+			if(parent == head){
+				head.setLchild(temp.getLchild());
 			}else {
-				root = null;
+				parent.setRchild(temp.getLchild());
+			}
+		}else if (head.getLchild() == null && head.getRchild()!= null) {
+			temp = head.getRchild();
+			head.setValue(temp.getValue());
+			head.setRchild(temp.getRchild());
+			head.setLchild(temp.getLchild());
+		}else if(head.getRchild() == null && head.getLchild() != null){
+			temp = head.getLchild();
+			head.setValue(temp.getValue());
+			head.setRchild(temp.getRchild());
+			head.setLchild(temp.getLchild());
+		}else{
+			if (parent.getRchild() == head) {
+				parent.setRchild(null);
+			}else {
+				parent.setLchild(null);
 			}
 		}
-		return dNode;
+		
 	}
 	
-	public TreeNode remove(int value){
-		return remove(this.root, value);
+	public void remove(int value){
+		remove(this.root, value);
 	}
 	/**
 	 * 中序遍历（递归）

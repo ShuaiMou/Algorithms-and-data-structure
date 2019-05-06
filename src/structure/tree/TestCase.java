@@ -45,8 +45,8 @@ public class TestCase {
 	public void testBinarySortTree3(){
 		tree.insert(array);
 		tree.preOrderTraverse();
-		tree.remove(1).display();
-		//tree.preOrderTraverse();
+		tree.remove(6);
+		tree.preOrderTraverse();
 	}
 
 }
