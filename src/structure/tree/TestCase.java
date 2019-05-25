@@ -1,9 +1,6 @@
 package structure.tree;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -71,14 +68,13 @@ public class TestCase {
 	 * Test AVL tree
 	 */
 	public void testAVLTree1(){
-		LinkedList<TreeNode> trace = new LinkedList();
+		LinkedList<TreeNode> trace = new LinkedList<TreeNode>();
 		avlTree.insert(1, trace);
 		avlTree.insert(2, trace);
 		avlTree.insert(3, trace);
 		avlTree.preOrderTraverse(avlTree.getRoot());
 		while(!trace.isEmpty()){
 			System.out.println(trace.pop().getValue());
-		}
-		
+		}	
 	}
 }
