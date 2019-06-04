@@ -1,8 +1,9 @@
 package algotithm.mazeProblem;
 
 public class Position {
-	
+	//行指针
 	public int row;
+	//列指针
 	public int col;
 	
 	public Position(){

@@ -5,20 +5,19 @@ import java.util.Stack;
 
 public class Maze {
 	int maze[][];
+	//用来表示是否访问过这个点。
 	boolean flag[][];
 	private int row = 10;
 	private int col = 10;
+	//存储一条路径
 	Stack<Position> stack;
-	
-	
-	public Maze(){
-		stack = new Stack<Position>();
-	}
-	
+
 	/**
 	 * 初始化迷宫
 	 */
+	@SuppressWarnings("resource")
 	public void init(){
+		stack = new Stack<Position>();
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("请输入迷宫的行数：");
 		row = scanner.nextInt();
@@ -35,7 +34,6 @@ public class Maze {
 				flag[i][j] = false;
 			}
 		}
-		scanner.close();
 	}
 	
 	/**
@@ -86,12 +84,11 @@ public class Maze {
 				i = stack.peek().row;
 				j = stack.peek().col;
 			}
-			
 		}
-		
 		return stack;
 	}
 	
+	//打印查找结果
 	public void result_dispaly(){
 		Stack<Position> newStack = new Stack<>();
 		if (stack.empty()) {
@@ -109,21 +106,18 @@ public class Maze {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				result[i][j] = (maze[i][j])+"";
-
 			}
 		}
 		while(!newStack.empty()){
 			Position p = newStack.pop();
 			result[p.row-1][p.col-1]="#";
 		}
-		
 		for (int i = 0; i <row; i++) {
 			for (int j = 0; j < col; j++) {
 				System.out.print(result[i][j]+"\t");
 			}
 			System.out.println();
 		}
-		
 	}
 	
 	

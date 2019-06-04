@@ -1,7 +1,10 @@
 package algotithm.mazeProblem;
 
-public class Test {
-	public static void main(String[] args) {
+import org.junit.Test;
+
+public class MazeTest {
+	@Test
+	public void test1(){
 		Maze maze = new Maze();
 		maze.init();
 		maze.findPath();
