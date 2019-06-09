@@ -26,13 +26,29 @@ public class TestGraph {
 		graph = new Graph(nodes, edges);
 	}
 	
+	//undirected
 	@Test
 	public void testGetAdjacencyMatrixRepresentation(){
 		graph.showGraphByMatrix();
 	}
 	
+	//directed
+		@Test
+	public void testGetAdjacencyMatrixRepresentation2(){
+		graph.setDirectedGraph(true);
+		graph.showGraphByMatrix();
+	}
+	
+	//undirected
 	@Test
 	public void testAdjacencyListRepresentation(){
+		graph.showGraphByList();
+	}
+	
+	//directed
+		@Test
+	public void testAdjacencyListRepresentation2(){
+		graph.setDirectedGraph(true);
 		graph.showGraphByList();
 	}
 }
