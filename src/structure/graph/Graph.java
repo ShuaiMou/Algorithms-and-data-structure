@@ -6,6 +6,9 @@ import java.util.LinkedList;
  * graph structure, this is used to create a graph by enter a set of vertices and edges.
  * the graph can be represented by adjacency matrix and adjacency list.
  * 
+ * if it is a directed graph, before getting the representation the  
+ * directedGraph instance variable must be set as true.
+ * 
  * @author Saul
  * 2019-06-09
  *
@@ -22,9 +25,20 @@ public class Graph {
 	 */
 	private  String[][] edges;
 	
+	/**
+	 * if the graph is directed, when get the representation, directedGraph should be set as true.
+	 * the default value is false.
+	 */
+	private boolean directedGraph;
+	
+	public void setDirectedGraph(boolean directedGraph) {
+		this.directedGraph = directedGraph;
+	}
+
 	public Graph(String[] nodes, String[][] edges) {
 		this.nodes = nodes;
 		this.edges = edges;
+		directedGraph = false;
 	}
 	
 	/**
@@ -36,7 +50,9 @@ public class Graph {
 			int indexX = findIndexOfNode(node[0]);
 			int indexY = findIndexOfNode(node[1]);
 			matrix[ indexX ][ indexY] = 1;
-			matrix[ indexY ][ indexX] = 1;
+			if ( !directedGraph) {
+				matrix[ indexY ][ indexX] = 1;
+			}
 		}
 		return matrix;
 	}
@@ -78,9 +94,12 @@ public class Graph {
 	}
 		for(String[] node : edges){
 			int index1 = findIndexOfNode(node[0]);
-			int index2 = findIndexOfNode(node[1]);
 			adjacencyList[ index1 ].add(node[1]);
-			adjacencyList[ index2 ].add(node[0]);
+			if ( !directedGraph ) {
+				int index2 = findIndexOfNode(node[1]);
+				adjacencyList[ index2 ].add(node[0]);
+			}
+			
 		}
 		return adjacencyList;
 	}
