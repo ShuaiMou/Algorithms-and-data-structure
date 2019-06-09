@@ -1,4 +1,7 @@
 package algotithm.graph;
+
+import java.util.LinkedList;
+
 /**
  * this class is used to graph algorithms:
  *  1.DFS
@@ -14,36 +17,38 @@ package algotithm.graph;
  *
  */
 public class GraphAlgorithms {
-	int[][] graph;
-	int[] nodes;
-	int count = 0;
-	
-	public GraphAlgorithms(int[][] graph){
-		this.graph = graph;
-		nodes =  new int[ graph.length ];
-	}
 	/**
-	 * 
-	 * @param graph use adjacency matrix presentation
+	 * adjacency matrix
 	 */
-	public void DFS(){
-		for (int i = 0; i < nodes.length; i++)
-			nodes[i] = 0;
-		for (int i = 0; i < nodes.length; i++) {
-			if (nodes[ i ] == 0) {
-				DFSExplore(i);
-			}
-		}
+	private int[][] adjacencyMatrix;
+	
+	/**
+	 * adjacency List
+	 */
+	private LinkedList<String>[] adjacencyList;
+	
+	/**
+	 * vertices of the graph
+	 */
+	private String[] nodes;
+	
+	public GraphAlgorithms( int[][] adjacencyMatrix, String[] nodes ){
+		this.adjacencyMatrix = adjacencyMatrix;
+		this.nodes = nodes;
 	}
 	
-	private void DFSExplore(int node){
-		nodes[ node ] = ++count;
-		for (int j = 0; j < graph[ node ].length; j++) {
-			if (graph[ node ][ j ] == 1) {
-				if (nodes[ j ] == 0) {
-					DFSExplore(j);
-				}
-			}
-		}
+	public GraphAlgorithms( LinkedList<String>[] adjacencyList, String[] nodes ){
+		this.adjacencyList = adjacencyList;
+		this.nodes = nodes;
+	} 
+	
+
+	public void DFS(){
+		
 	}
+	
+	private void DFSExplore(){
+	
+	}
+	
 }
