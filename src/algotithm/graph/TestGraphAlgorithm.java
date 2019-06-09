@@ -26,6 +26,7 @@ public class TestGraphAlgorithm {
 			{"J","G"}
 		};
 		Graph graph = new Graph(nodes, edges);
+		graph.setDirectedGraph(true);
 		graphAlgorithm = new GraphAlgorithms(graph.getAdjacencyMatrixRepresentation(), nodes);
 	}
 	
@@ -46,6 +47,17 @@ public class TestGraphAlgorithm {
 	@Test
 	public void testBFS(){
 		Stack<String> stack = graphAlgorithm.BFS();
+		while( !stack.isEmpty() ){
+			System.out.print(" " + stack.pop());
+		}
+	}
+	
+	/**
+	 * set directedGraph as true at first.
+	 */
+	@Test
+	public void testTopologySort(){
+		Stack<String> stack = graphAlgorithm.topologySort();
 		while( !stack.isEmpty() ){
 			System.out.print(" " + stack.pop());
 		}

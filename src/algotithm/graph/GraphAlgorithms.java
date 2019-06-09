@@ -44,6 +44,11 @@ public class GraphAlgorithms {
 	 */
 	private Stack< String > dfs_bfsSequence = null;
 	
+	/**
+	 * for topology sort
+	 */
+	private Stack<String> stackForTopologySort = null;
+	
 	public GraphAlgorithms( int[][] adjacencyMatrix, String[] nodes ){
 		this.adjacencyMatrix = adjacencyMatrix;
 		this.nodes = nodes;
@@ -59,6 +64,8 @@ public class GraphAlgorithms {
 	private void initGraph(){
 		this.markNode = new boolean[nodes.length];
 		dfs_bfsSequence = new Stack<>();
+		//for topology sort
+		stackForTopologySort = new Stack<>();
 	}
 
 	/**
@@ -69,21 +76,40 @@ public class GraphAlgorithms {
 	 */
 	public Stack< String > DFS(){
 		initGraph();
+	    Stack<String> stackForDfs = new Stack<>();
 		for(int i = 0; i < nodes.length; i++){
 			if ( !markNode[ i ] ) {
-				DFSExplore( i );
+				markNode[ i ] = true;
+				dfs_bfsSequence.push(nodes[ i ]);
+				stackForDfs.push(nodes[ i ]);
+				DFSExplore( i, stackForDfs );
 			}
 		}
 		return dfs_bfsSequence;
 	}
 	
-	private void DFSExplore(int index){
-		markNode[ index ] = true;
-		dfs_bfsSequence.push(nodes[ index ]);
+	private void DFSExplore(int index, Stack<String> stackForDfs){
 		for (int i = 0; i < adjacencyMatrix[ index ].length; i++) {
-			if (adjacencyMatrix[ index ][ i ] == 1 && !markNode[ i ]) {
-				DFSExplore( i );
+			if (adjacencyMatrix[ index ][ i ] == 1 && !markNode[ i ]) {	
+				markNode[ i ] = true;
+				dfs_bfsSequence.push(nodes[ i ]);
+				stackForDfs.push(nodes[ i ]);
+				DFSExplore( i, stackForDfs);
 			}
+		}
+		if ( !stackForDfs.isEmpty()) {
+			String node = stackForDfs.pop();
+			stackForTopologySort.push(node);
+			if (!stackForDfs.isEmpty()) {
+				node = stackForDfs.peek();
+				for (int i = 0; i < nodes.length; i++) {
+					if (node.equals(nodes[ i ])) {
+						DFSExplore( i, stackForDfs);
+						break;
+					}
+				}
+			}
+			
 		}
 	}
 	
@@ -128,4 +154,14 @@ public class GraphAlgorithms {
 			BFSExplore(position, queue);
 		}
 	}
+	
+	/**
+	 * 
+	 * @return the stack store the order of DFS pop, which also the topology sort order
+	 */
+	public Stack<String> topologySort(){
+		DFS();
+		return stackForTopologySort;
+	}
+	
 }
