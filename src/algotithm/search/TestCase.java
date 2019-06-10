@@ -34,4 +34,18 @@ public class TestCase {
 		int index = search.interpolationSearch(array, 100);
 		System.out.println(index);
 	}
+	
+	
+	@Test
+	/**
+	 * 输入pattern 和 text
+	 * use brute-force method to find the substring
+	 */
+	public void testStringSearch(){
+		StringSearch search = new StringSearch();
+		String pattern = "km";
+		String text = "accnioopkouokkm";
+		int index = search.bruteForceSearch(pattern, text);
+		System.out.println(index);
+	}
 }
