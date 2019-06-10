@@ -53,13 +53,27 @@ public class TestGraphAlgorithm {
 	}
 	
 	/**
-	 * set directedGraph as true at first.
+	 * set directedGraph as true before this test.
 	 */
 	@Test
 	public void testTopologySort(){
 		Stack<String> stack = graphAlgorithm.topologySort();
 		while( !stack.isEmpty() ){
 			System.out.print(" " + stack.pop());
+		}
+	}
+	
+	/**
+	 * set directedGraph as true before this test.
+	 */
+	@Test
+	public void testWarshall(){
+		int[][] transitiveClosure = graphAlgorithm.warshall();
+		for (int[] temp : transitiveClosure) {
+			for (int link : temp) {
+				System.out.print(" " + link);
+			}
+			System.out.println();
 		}
 	}
 }

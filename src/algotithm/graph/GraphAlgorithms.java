@@ -162,6 +162,34 @@ public class GraphAlgorithms {
 	public Stack<String> topologySort(){
 		DFS();
 		return stackForTopologySort;
-	}
+	} 
 	
+	/**
+	 * 
+	 * @return two-dimensional matrix transitiveClosure 
+	 * represents one nodes is reachable from another nodes 
+	 * 
+	 * 	However, it is not the best transitive-closure algorithm to use for sparse graphs. 
+	 * For sparse graphs, you may be better off just doing DFS from each node v in turn, 
+	 * keeping track of which nodes are reached from v. 
+	 */
+	public int[][] warshall(){
+		int[][] transitiveClosure = adjacencyMatrix.clone();
+		int length = nodes.length;
+		//column k扫描
+		for (int k = 0; k < length; k++) {
+			//row i 扫描
+			for (int i = 0; i <length; i++) {
+				if (transitiveClosure[ i ][ k ] == 1) {
+					//row k 扫描
+					for (int j = 0; j < length; j++) {
+						if (transitiveClosure[ k ][ j ] == 1) {
+							transitiveClosure[ i ][ j ] = 1;
+						}
+					}
+				}
+			}
+		}
+		return transitiveClosure;
+	}
 }
