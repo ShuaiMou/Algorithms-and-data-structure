@@ -25,6 +25,11 @@ public class GraphAlgorithms {
 	private int[][] adjacencyMatrix;
 	
 	/**
+	 * adjacency matrix whose value is the weight of the edge
+	 */
+	private int[][] adjacencyWeightMatrix;
+	
+	/**
 	 * adjacency List
 	 */
 	//private LinkedList<String>[] adjacencyList;
@@ -49,9 +54,15 @@ public class GraphAlgorithms {
 	 */
 	private Stack<String> stackForTopologySort = null;
 	
-	public GraphAlgorithms( int[][] adjacencyMatrix, String[] nodes ){
+	/**
+	 * represent infinite distance between two node in the graph
+	 */
+	private static final int infinit = 100000;
+	
+	public GraphAlgorithms( int[][] adjacencyMatrix, String[] nodes,  int[][] adjacencyWeightMatrix){
 		this.adjacencyMatrix = adjacencyMatrix;
 		this.nodes = nodes;
+		this.adjacencyWeightMatrix = adjacencyWeightMatrix;
 	}
 	
 	/*
@@ -191,5 +202,28 @@ public class GraphAlgorithms {
 			}
 		}
 		return transitiveClosure;
+	}
+	
+	public int[][] floyd(){
+		int[][] distance =adjacencyWeightMatrix.clone();
+		for (int i = 0; i < distance.length; i++) {
+			for (int j = 0; j < distance.length; j++) {
+				if (distance[ i ][ j ] == 0 && i != j) {
+					distance[ i ][ j ] = infinit;
+				}
+			}
+		}
+		int length = nodes.length;
+		//column k扫描
+		for (int k = 0; k < length; k++) {
+			//row i 扫描
+			for (int i = 0; i <length; i++) {
+				//row k 扫描
+				for (int j = 0; j < length; j++) {
+					distance[ i ][ j ] = Math.min(distance[ i ][ j ], (distance[ i ][ k ] + distance[ k ][ j ]));
+				}
+			}
+		}
+		return distance;
 	}
 }

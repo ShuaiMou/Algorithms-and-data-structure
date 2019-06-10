@@ -15,19 +15,19 @@ public class TestGraphAlgorithm {
 		String[] nodes = {"A","B","C","D","E","F","G","H","I","J","K"};
 
 		String[][] edges = new String[][]{
-			{"A","C"},
-			{"A","D"},
-			{"A","F"},
-			{"B","C"},
-			{"C","D"},
-			{"E","G"},
-			{"D","G"},
-			{"I","J"},
-			{"J","G"}
+			{"A","C","3"},
+			{"A","D","2"},
+			{"A","F","1"},
+			{"B","C","4"},
+			{"C","D","6"},
+			{"E","G","8"},
+			{"D","G","9"},
+			{"I","J","2"},
+			{"J","G","3"}
 		};
 		Graph graph = new Graph(nodes, edges);
 		graph.setDirectedGraph(true);
-		graphAlgorithm = new GraphAlgorithms(graph.getAdjacencyMatrixRepresentation(), nodes);
+		graphAlgorithm = new GraphAlgorithms(graph.getAdjacencyMatrixRepresentation(), nodes, graph.getAdjacencyWeightMatrix());
 	}
 	
 	/**
@@ -72,6 +72,17 @@ public class TestGraphAlgorithm {
 		for (int[] temp : transitiveClosure) {
 			for (int link : temp) {
 				System.out.print(" " + link);
+			}
+			System.out.println();
+		}
+	}
+	
+	@Test
+	public void testFloyd(){
+		int[][] distance = graphAlgorithm.floyd();
+		for (int[] temp : distance) {
+			for (int dis : temp) {
+				System.out.printf("%-8d", dis);
 			}
 			System.out.println();
 		}
