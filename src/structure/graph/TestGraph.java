@@ -13,15 +13,15 @@ public class TestGraph {
 		String[] temp = {"A","B","C","D","E","F","G","H","I","J","K"};
 		nodes =temp;
 		edges = new String[][]{
-			{"A","C"},
-			{"A","D"},
-			{"A","F"},
-			{"B","C"},
-			{"C","D"},
-			{"E","G"},
-			{"D","G"},
-			{"I","J"},
-			{"J","G"}
+			{"A","C","3"},
+			{"A","D","2"},
+			{"A","F","1"},
+			{"B","C","4"},
+			{"C","D","6"},
+			{"E","G","8"},
+			{"D","G","9"},
+			{"I","J","2"},
+			{"J","G","3"}
 		};
 		graph = new Graph(nodes, edges);
 	}
@@ -51,4 +51,17 @@ public class TestGraph {
 		graph.setDirectedGraph(true);
 		graph.showGraphByList();
 	}
+	
+	//directed
+		@Test
+	public void testGetAdjacencyWeightMatrix(){
+		//graph.setDirectedGraph(true);
+		int[][] matrix = graph.getAdjacencyWeightMatrix();
+		for (int[] temp : matrix) {
+			for (int i : temp) {
+				System.out.print(" "+ i);
+			}
+			System.out.println();
+		}
+	}	
 }

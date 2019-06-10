@@ -22,6 +22,7 @@ public class Graph {
 	/**
 	 * a two-dimensional array to store edges of the graph,
 	 * the number of rows represents the number of edges.
+	 * it has three column or two column, the first two represent edges, the thirds is weight.
 	 */
 	private  String[][] edges;
 	
@@ -115,6 +116,23 @@ public class Graph {
 				}
 				System.out.println();
 		}
+	}
+	
+	/**
+	 * @return Adjacency weight Matrix Representation of the graph
+	 */
+	public int[][] getAdjacencyWeightMatrix(){
+		int[][] weightedMatrix = new int[ nodes.length ][ nodes.length ];
+		for( String[] node : edges){
+			int indexX = findIndexOfNode(node[0]);
+			int indexY = findIndexOfNode(node[1]);
+			int weight = Integer.parseInt(node[2]);
+			weightedMatrix[ indexX ][ indexY] = weight;
+			if ( !directedGraph) {
+				weightedMatrix[ indexY ][ indexX] = weight;
+			}
+		}
+		return weightedMatrix;
 	}
 }
 
