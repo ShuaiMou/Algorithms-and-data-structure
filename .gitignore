@@ -1,3 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 Algorithms-and-data-structure.iml
+src/main/resources/
+target/
