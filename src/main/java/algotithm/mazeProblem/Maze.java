@@ -90,7 +90,7 @@ public class Maze {
 	
 	//打印查找结果
 	public void result_dispaly(){
-		Stack<Position> newStack = new Stack<>();
+		Stack<Position> newStack = new Stack<Position>();
 		if (stack.empty()) {
 			System.out.println("没有出路");
 		}else {
