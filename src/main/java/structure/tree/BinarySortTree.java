@@ -233,7 +233,7 @@ public class BinarySortTree {
 	public void remove(TreeNode root, int value){
 		TreeNode head = root;
 		TreeNode parent = head;
-		TreeNode temp  = null;
+		TreeNode temp;
 		while(head != null && value != head.getValue()){
 			parent = head;
 			if (value < head.getValue()) {
