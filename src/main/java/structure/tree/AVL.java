@@ -17,13 +17,12 @@ public class AVL {
 	 * 插入节点值为value的节点，并用栈记录其插入路径(先进后出)
 	 * @param value
 	 * @param trace
-	 * @return
 	 */
-	public String insert(int value, LinkedList<TreeNode> trace){
+	public void insert(int value, LinkedList<TreeNode> trace){
 		String error = null;
 		if(this.root == null){
 			this.root = new TreeNode(value);
-			return error;
+			return;
 		}
 		TreeNode current = root;
 		TreeNode newNode = new TreeNode(value);
@@ -33,19 +32,19 @@ public class AVL {
 				if (current.getLchild() == null) {
 					current.setLchild(newNode);
 					trace.push(newNode);
-					return error;
+					return;
 				}
 				current = current.getLchild();
 			}else if(value > current.getValue()){
 				if(current.getRchild() == null){
 					current.setRchild(newNode);
 					trace.push(newNode);
-					return error;
+					return;
 				}
 				current = current.getRchild();
 			}else {
 				error = "this node has already existed in the tree";
-				return error;
+				return;
 			}	
 		}
 	}
